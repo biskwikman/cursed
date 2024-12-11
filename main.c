@@ -1,26 +1,25 @@
 #include <ncurses.h>
+#include "main.h"
 #define MINIAUDIO_IMPLEMENTATION
 #include "./miniaudio.h"
 
-#define PINK 1
 
-
-void printChars(char text[])
+void printChars(WINDOW *win, char text[])
 {
     char *t;
     t = text;
     while(*t)
     {
-        addch(*t);
+        waddch(win, *t);
         t++;
-        refresh();
+        wrefresh(win);
         napms(100);
     }
 }
 
-int main()
+int main(void)
 {
-    char text[] = "Get in.";
+    char text[] = "\"Get in.\"";
 
     ma_result result;
     ma_engine engine;
@@ -39,16 +38,8 @@ int main()
     int win_height = half_lines / 2;
     int win_width = half_cols / 2;
     WINDOW *win = newwin(half_lines, half_cols, win_height, win_width);
-    box(win, 0, 0);
 
-    start_color();
-    init_color(PINK,1000,750,750);
-    init_pair(1,PINK,COLOR_BLACK);
-    attrset(COLOR_PAIR(1));
-
-    printChars(text);
-    wmove(win,1,1);
-    waddstr(win, "windowwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+    printChars(win, text);
     ma_engine_play_sound(&engine, "BabyElephantWalk60.wav", NULL);
 
     wrefresh(win);
