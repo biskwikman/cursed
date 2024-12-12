@@ -2,5 +2,5 @@
 #define MINIAUDIO_IMPLEMENTATION
 #include "./miniaudio.h"
 void PrintChars(WINDOW *win, char text[]);
-ma_engine InitMiniaudio();
+void InitMiniaudio(ma_engine *engine);
 
