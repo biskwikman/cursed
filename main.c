@@ -3,8 +3,17 @@
 #define MINIAUDIO_IMPLEMENTATION
 #include "./miniaudio.h"
 
+ma_engine InitMiniaudio()
+{
+    ma_engine engine;
+    ma_engine_init(NULL, &engine);
+//  if (result != MA_SUCCESS) {
+//      return -1;
+//  }
+    return engine;
+}
 
-void printChars(WINDOW *win, char text[])
+void PrintChars(WINDOW *win, char text[])
 {
     char *t;
     t = text;
@@ -21,14 +30,8 @@ int main(void)
 {
     char text[] = "\"Get in.\"";
 
-    ma_result result;
-    ma_engine engine;
-
-    result = ma_engine_init(NULL, &engine);
-    if (result != MA_SUCCESS) {
-        return -1;
-    }
     
+    ma_engine engine = InitMiniaudio(); 
     initscr();
     refresh();
 
@@ -39,7 +42,7 @@ int main(void)
     int win_width = half_cols / 2;
     WINDOW *win = newwin(half_lines, half_cols, win_height, win_width);
 
-    printChars(win, text);
+    PrintChars(win, text);
     ma_engine_play_sound(&engine, "BabyElephantWalk60.wav", NULL);
 
     wrefresh(win);

@@ -1,2 +1,6 @@
 #include <ncurses.h>
-void printChars(WINDOW *win, char text[]);
+#define MINIAUDIO_IMPLEMENTATION
+#include "./miniaudio.h"
+void PrintChars(WINDOW *win, char text[]);
+ma_engine InitMiniaudio();
+
