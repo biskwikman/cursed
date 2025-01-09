@@ -48,6 +48,11 @@ int main(void)
     PrintChars(dialog_win, "\"Get in I said.\"");
     PrintChars(dialog_win, "\"I wornt hurt you if you jus get in.\"");
 
+    WINDOW *select_win = newwin(half_lines / 2, half_cols, win_height + (win_height / 2), win_width / 2 - (win_width / 4));
+    box(select_win, 0, 0);
+
+    wgetch(select_win);
+
     ma_engine_uninit(&engine);
     endwin();
     return(0);
